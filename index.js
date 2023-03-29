@@ -2,7 +2,7 @@ const express =require('express');
 const doten = require('dotenv');
 const mongoose =require('mongoose');
 const cors =require('cors');
-
+const userRoutes = require("./routes/user");
 doten.config();
 const app = express();
 
@@ -39,7 +39,7 @@ const options = {
     },
     //apis: ['./routes/*.js']
 }
-
+app.use("/v1/user",userRoutes);
 app.listen(3001,()=>{
     console.log('Server is running')
 })
