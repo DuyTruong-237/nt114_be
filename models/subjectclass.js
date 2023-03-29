@@ -1,43 +1,42 @@
 const mongoose =require('mongoose')
 
 const subjSchema = mongoose.Schema({
-   subclassid:{
-        type: Int32Array, 
-        required: true, 
-        maxLength: 50,
+   subclass_id:{
+    type: String,
+    require:true,
+    maxLength: 50
    },
     subname:{
-        type: String,
-        required: true,
-        maxLength: 50
+    type: String,
+    require:true,
+    maxLength: 50
     },
-    lectureid:{
-        type: Int32Array,
-        required: true,
-        maxLength: 50
+    lecturer_id:{
+        type: mongoose.Schema.Types.ObjectId,ref: 'Lecturer', required: true, maxLength: 50
     },
     term:{
-        type: Int8Array,
-        required: true,
-        maxLength: 1,
+        type: Number, require: true, 
+       
     },
     yearSchool:{
-
+        type: Number, require: true
     },
     startDate:{
+        type: Date, require: true
 
     },
     endDate:{
+        type: Date, require: true
 
     },
     status:{
-
+        type: Number, require: true
     },
     classDay:{
-
+        type: Number, require: true
     },
     lession:{
-
+        type: Number, require: true
     },
 })
 

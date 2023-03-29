@@ -1,13 +1,12 @@
 const mongoose =require('mongoose')
 
 const sublecturersSchema = mongoose.Schema({
-    subjLecturers:{
-
+   
+    lecturers_id:{
+        type: mongoose.Schema.Types.ObjectId,ref: 'Lecturer', required: true, maxLength: 50
     },
-    lecturersId:{
-
-    },
-    subjectId:{
+    subject_id:{
+        type: mongoose.Schema.Types.ObjectId,ref: 'Subject', required: true, maxLength: 50
 
     },
 })
