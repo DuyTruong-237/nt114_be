@@ -19,7 +19,7 @@ const notitSchema = mongoose.Schema({
         type: Date, require: true
     },
     time:{
-        type: TimeRanges, require: true
+        type: String, require: true
     },
     type:{
         type: Number,

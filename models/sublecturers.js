@@ -9,4 +9,6 @@ const sublecturersSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,ref: 'Subject', required: true, maxLength: 50
 
     },
-})
+},{timestamps:true})
+const sublec = mongoose.model('SubjectLecture',sublecturersSchema);
+module.exports= sublec;

@@ -38,5 +38,7 @@ const subjSchema = mongoose.Schema({
     lession:{
         type: Number, require: true
     },
-})
+},{timestamps:true})
+const subjectClass = mongoose.model('SubjectClass',subjSchema);
+module.exports= subjectClass;
 

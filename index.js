@@ -3,6 +3,16 @@ const doten = require('dotenv');
 const mongoose =require('mongoose');
 const cors =require('cors');
 const userRoutes = require("./routes/user");
+const acclassRoutes = require("./routes/acclass");
+const coreRoutes = require("./routes/core");
+const departRoutes = require("./routes/department");
+const lecturerRoutes = require("./routes/lecturers");
+const notiRoutes = require("./routes/notification");
+const studentRoutes = require("./routes/student");
+const subjectRoutes = require("./routes/subject");
+const subclassRoutes = require("./routes/subjectclass");
+const sublecRoutes = require("./routes/subjecturerers");
+
 doten.config();
 const app = express();
 
@@ -40,6 +50,15 @@ const options = {
     //apis: ['./routes/*.js']
 }
 app.use("/v1/user",userRoutes);
+app.use("/v1/core",coreRoutes);
+app.use("/v1/acclass",acclassRoutes);
+app.use("/v1/depart",departRoutes);
+app.use("/v1/lecturer",lecturerRoutes);
+app.use("/v1/notifi",notiRoutes);
+app.use("/v1/student",studentRoutes);
+app.use("/v1/subject",subjectRoutes);
+app.use("/v1/subclass",subclassRoutes);
+app.use("/v1/sublec",sublecRoutes);
 app.listen(3001,()=>{
     console.log('Server is running')
 })
