@@ -11,7 +11,7 @@ const lecturersSchema = mongoose.Schema({
     departmentID:{
 
     },
-    name:{
+    lecturersName:{
 
     },
     Cl:{

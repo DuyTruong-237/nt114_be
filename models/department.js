@@ -4,13 +4,13 @@ const departSchema = mongoose.Schema({
     idDepartment:{
         type : String, require : true, Maxlength : 50
     },
-    name:{
+    departmentName:{
         type : String, require : true, Maxlength : 50
     },
     desText:{
 
     },
-    dean:{
+    departmentDean:{
         type : String, require : true, Maxlength : 50
     }
 

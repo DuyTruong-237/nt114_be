@@ -7,7 +7,7 @@ const subjSchema = mongoose.Schema({
     departmentId:{
 
     },
-    name:{
+    subjName:{
 
     },
     desText:{

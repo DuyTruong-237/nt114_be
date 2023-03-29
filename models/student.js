@@ -12,5 +12,39 @@ const studentSchema = mongoose.Schema({
     department_id:{
         type: String, required: true, maxLength: 50
        },
+    acclassId:{
+
+    },
+    studentName:{
+
+    },
+    studentCl:{
+
+    },
+    dobDate:{
+
+    },
+    studentSex:{
+
+    },
+    address:{
+
+    },
+    email:{
+
+    },
+    phoneNum:{
+
+    },
+    majors:{
+
+    },
+    trainSys:{
+
+    },
+    status:{
+
+    },
+
     
 })
