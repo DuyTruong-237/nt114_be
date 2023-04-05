@@ -47,7 +47,7 @@ const options = {
             }
         ]
     },
-    //apis: ['./routes/*.js']
+    apis: ['./routes/*.js']
 }
 app.use("/v1/user",userRoutes);
 app.use("/v1/core",coreRoutes);

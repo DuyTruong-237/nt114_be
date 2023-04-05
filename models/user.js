@@ -14,14 +14,14 @@ const userSchema = mongoose.Schema({
         type: String, required: true, maxLength: 50
     }
 },{timestamps:true})
-userSchema.set('toJSON',{
-    virtuals:true,
-    transform: function(doc, ret){
-        ret.id= ret._id;
-        delete ret._id;
-        delete ret._V
-    }
-})
+
+// userSchema.pre('save',function(next){
+//     const user =  this;
+//     if(!user.idUser){
+//         user.idUser='USER'+ Date.now().toString();
+//     }
+//     next();
+// });
 
 const user = mongoose.model('User',userSchema);
 module.exports= user;
