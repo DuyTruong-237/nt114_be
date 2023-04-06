@@ -6,7 +6,11 @@ const userController = {
         try{
            
 
-            const newUser = new userModel ({idUser:"USER"+ uuidv4().substr(0,6).toString(),userName:req.body.userName, password:req.body.password, position:req.body.position})
+            const newUser = new userModel ({
+            idUser:"USER"+ uuidv4().substr(0,6).toString(),
+            userName:req.body.userName,
+            password:req.body.password,
+            position:req.body.position})
             await newUser.save();
             res.status(201).json({
                 message:"User created successfully",

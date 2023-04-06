@@ -1,18 +1,19 @@
 const mongoose =require('mongoose')
 
 const departSchema = mongoose.Schema({
-    id_Department:{
-        type : String, require : true, Maxlength : 50
-    },
+   
     name:{
         type : String, require : true, Maxlength : 50
     },
-    desText:{
+    des:{
         type: String
 
     },
     dean:{
-        type: mongoose.Schema.Types.ObjectId,ref: 'Lecturer', required: true, maxLength: 50
+        type: mongoose.Schema.Types.ObjectId,ref: 'Lecturer',  maxLength: 50
+    },
+     vDean:{
+        type: mongoose.Schema.Types.ObjectId,ref: 'Lecturer',  maxLength: 50
     }
 
 },{timestamps:true})

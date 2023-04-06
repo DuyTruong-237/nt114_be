@@ -9,7 +9,7 @@ const lecturersSchema = mongoose.Schema({
     },
     idUser:{
 
-        type: mongoose.Schema.Types.ObjectId,ref: 'User', required: true, maxLength: 50
+        type: String,ref: 'User', required: true, maxLength: 50
     },
     // idDepartment:{
     //     type: mongoose.Schema.Types.ObjectId,ref: 'Department', required: true, maxLength: 50

@@ -4,10 +4,10 @@ const userModel=require("../models/user")
 const {v4: uuidv4} = require('uuid');
 const mongoose = require('mongoose');
 const createUser = async (uName,id)=> {
-    console.log("03")
+
     const password= uuidv4().substr(0,8).toString();
     const newUser= new userModel({idUser:id,userName:uName, password:password,position:"student"});
-    console.log("04")
+ 
     return await newUser.save();
 }
 const createStudent = async (uName, idUser)=> {
@@ -79,13 +79,32 @@ const studentController = {
     }
   }
   ,
+  getStudentID : async(req,res)=>{
+    try{
+      let student;
+      if(req.body.idUser)
+      {
+        student= await studentModel.findOne({idUser: req.body.idUser});
+      }
+      else if(req.body.id)
+      {
+        student = await studentModel.findOne({id: req.body.id});
+      }
+      res.status(201).json(student);
+    }
+    catch(err){
+      res.status(500).json("Server not found")
+
+    }
+  }
+  ,
   updateStudent : async(req,res)=>{
         try{
-          console.log("0");
+         
           const id= req.params.id;
-          console.log("3");
+         
           const student= await studentModel.findById(id);
-          console.log("1");
+         
           if(!student)
           {
             return res.status(404).json({error:"Student not found"});
@@ -93,7 +112,7 @@ const studentController = {
           }
           const updateStudent=req.body;
            Object.assign(student, updateStudent);
-           console.log("2");
+          
             await student.save();
           res.status(201).json(student);
         }catch(err){
