@@ -12,7 +12,7 @@ const lecturersSchema = mongoose.Schema({
         type: String,ref: 'User', required: true, maxLength: 50
     },
     department_id:{
-        type: mongoose.Schema.Types.ObjectId,ref: 'Department', required: true, maxLength: 50
+        type: mongoose.Schema.Types.ObjectId,ref: 'Department', required: true, maxLength: 50, 
     },
     name:{
         type: String,

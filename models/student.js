@@ -13,9 +13,9 @@ const studentSchema = mongoose.Schema({
     department_id:{
         type:  mongoose.Schema.Types.ObjectId,ref: 'Department', required: true, maxLength: 50
        },
-    // acclass_id: {
-    //     type:  mongoose.Schema.Types.ObjectId,ref: 'Acclass', require: true, maxLength: 50
-    // },
+    acclass_id: {
+        type:  mongoose.Schema.Types.ObjectId,ref: 'Acclass', require: true, maxLength: 50
+    },
     name: {
         type: String,
         require:true,
