@@ -19,17 +19,21 @@ const subjSchema = mongoose.Schema({
         require:true,
         
     },
+    cre:{
+        type: Number, 
+        require:true,
+    },
     coProcess:{
-        type: Number, require: true, 
+        type: Number
     },
     coPractice:{
-        type: Number, require: true, 
+        type: Number 
     },
     coMidterm:{
-        type: Number, require: true, 
+        type: Number
     },
     coEndterm:{
-        type: Number, require: true, 
+        type: Number
     },
 },{timestamps:true})
 const subject = mongoose.model('Subject',subjSchema);

@@ -1,7 +1,8 @@
 const subjectClassModel = require("../models/subjectClass");
 
+
 const subjectClassController = {
-    
+   
   
 };
 

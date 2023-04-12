@@ -18,7 +18,7 @@ const acclassController = {
     },
     deleteAcClass : async (req,res)=>{
         try{
-            id=req.params.id;
+            const id=req.params.id;
             const acclass= await acclassModel.findById(id);
             if(!acclass)
             {
