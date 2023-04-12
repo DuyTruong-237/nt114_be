@@ -10,9 +10,9 @@ const createUser = async(uName,id)=>
     const newUser= new userModel({idUser:id,userName: uName, password:password,position:'lecturer'});
     return await newUser.save();
 }
-const createLecturer = async(uName,idUser)=>
+const createLecturer = async(uName,idUser,depart_id)=>
 {
-    const newLecturer= new lecturerModel({id:"LEC"+uuidv4().substr(0,6).toString(),idUser:idUser, name:uName});
+    const newLecturer= new lecturerModel({id:"LEC"+uuidv4().substr(0,6).toString(),idUser:idUser, name:uName, department_id:depart_id});
     return await newLecturer.save();
 }
 const lecturerController = {
@@ -37,7 +37,7 @@ const lecturerController = {
                 user= await createUser(req.body.name,idUser);
 
             }
-            const newLecturer=await createLecturer(req.body.name,user.idUser);
+            const newLecturer=await createLecturer(req.body.name,user.idUser,req.body.department_id);
             res.status(201).json(newLecturer);
         }catch(err){
             res.status(500).json({error:"Server not found"});

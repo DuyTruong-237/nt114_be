@@ -34,21 +34,21 @@ db.once('open', () => {
 app.use(cors());
 app.use(express.json());
 app.use('/uploads',express.static('uploads'))
-const options = {
-    definition: {
-        openai: '3.0.0',
-        info: {
-            title: 'School app api',
-            version: '1.0.0'
-        },
-        servers: [
-            {
-                url: 'http://localhost:8000/'
-            }
-        ]
-    },
-    apis: ['./routes/*.js']
-}
+// const options = {
+//     definition: {
+//         openai: '3.0.0',
+//         info: {
+//             title: 'School app api',
+//             version: '1.0.0'
+//         },
+//         servers: [
+//             {
+//                 url: 'http://localhost:8000/'
+//             }
+//         ]
+//     },
+//     apis: ['./routes/*.js']
+// }
 app.use("/v1/user",userRoutes);
 app.use("/v1/core",coreRoutes);
 app.use("/v1/acclass",acclassRoutes);

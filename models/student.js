@@ -10,9 +10,9 @@ const studentSchema = mongoose.Schema({
     idUser:{
         type: String,ref: 'User', required: true, maxLength: 50,unique:true
        },
-    // department_id:{
-    //     type:  mongoose.Schema.Types.ObjectId,ref: 'Department', required: true, maxLength: 50
-    //    },
+    department_id:{
+        type:  mongoose.Schema.Types.ObjectId,ref: 'Department', required: true, maxLength: 50
+       },
     // acclass_id: {
     //     type:  mongoose.Schema.Types.ObjectId,ref: 'Acclass', require: true, maxLength: 50
     // },

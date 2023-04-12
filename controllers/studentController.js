@@ -10,8 +10,8 @@ const createUser = async (uName,id)=> {
  
     return await newUser.save();
 }
-const createStudent = async (uName, idUser)=> {
-    const newStudent=new studentModel({id:"STD"+uuidv4().substr(0,6).toString(),idUser:idUser,name:uName})
+const createStudent = async (uName, idUser, depart_id)=> {
+    const newStudent=new studentModel({id:"STD"+uuidv4().substr(0,6).toString(),idUser:idUser,name:uName, department_id:depart_id})
     return await newStudent.save();
 }
 const studentController = {
@@ -34,7 +34,7 @@ const studentController = {
          console.log("05")
        }
        console.log("00")
-       const student= await createStudent(req.body.name,user.idUser);
+       const student= await createStudent(req.body.name,user.idUser,req.body.department_id);
 
         // let user;
         // console.log("1");
