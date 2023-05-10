@@ -24,16 +24,20 @@ const subjSchema = mongoose.Schema({
         require:true,
     },
     coProcess:{
-        type: Number
+        type: Number,
+        default:0
     },
     coPractice:{
-        type: Number 
+        type: Number ,
+        default:0
     },
     coMidterm:{
-        type: Number
+        type: Number,
+        default:0
     },
     coEndterm:{
-        type: Number
+        type: Number,
+        default:0
     },
 },{timestamps:true})
 const subject = mongoose.model('Subject',subjSchema);

@@ -6,6 +6,12 @@ const subjSchema = mongoose.Schema({
     require:true,
     maxLength: 50
    },
+   subject_id:{
+    type:String,
+    require:true,
+    maxLength:50,
+    ref:'Subject'
+   },
     subname:{
     type: String,
     require:true,
@@ -36,7 +42,7 @@ const subjSchema = mongoose.Schema({
         type: Number, require: true
     },
     lession:{
-        type: Number, require: true
+        type:String, require: true
     },
 },{timestamps:true})
 const subjectClass = mongoose.model('SubjectClass',subjSchema);

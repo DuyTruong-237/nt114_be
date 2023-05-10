@@ -22,13 +22,13 @@ const studentController = {
        let user;
        if(req.body.idUser)
        {
-        console.log("01")
+    
         user  =await userModel.findOne({idUser: req.body.idUser});
         if(!user){
             return res.status(404).json({error:"User not found"});
         }
        }else{
-        console.log("02")
+       
          const idUser="USER"+uuidv4().substr(0,6).toString();
          user= await createUser(req.body.name,idUser);
          console.log("05")

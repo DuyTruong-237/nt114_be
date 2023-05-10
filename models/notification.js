@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 
 const notitSchema = mongoose.Schema({
-    noti_id:{
-        type: String,
-        require:true,
-        maxLength: 50
-    },
+    
     title:{
         type: String,
         require:true,
@@ -16,10 +12,7 @@ const notitSchema = mongoose.Schema({
         require:true,
     },
     day:{
-        type: Date, require: true
-    },
-    time:{
-        type: String, require: true
+        type:Date , require: true
     },
     type:{
         type: Number,
@@ -27,7 +20,7 @@ const notitSchema = mongoose.Schema({
 
     },
     subject_class_id:{
-        type: mongoose.Schema.Types.ObjectId,ref: 'Subject_Class', required: true, maxLength: 50
+        type: mongoose.Schema.Types.ObjectId,ref: 'Subject_Class', maxLength: 50
         
     },
     creater_id:{

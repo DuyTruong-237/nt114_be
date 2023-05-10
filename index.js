@@ -12,6 +12,7 @@ const studentRoutes = require("./routes/student");
 const subjectRoutes = require("./routes/subject");
 const subclassRoutes = require("./routes/subjectclass");
 const sublecRoutes = require("./routes/subjecturerers");
+const ABC = require("./routes/abc");
 
 doten.config();
 const app = express();
@@ -49,6 +50,7 @@ app.use('/uploads',express.static('uploads'))
 //     },
 //     apis: ['./routes/*.js']
 // }
+app.use("/v1/abc",ABC);
 app.use("/v1/user",userRoutes);
 app.use("/v1/core",coreRoutes);
 app.use("/v1/acclass",acclassRoutes);
