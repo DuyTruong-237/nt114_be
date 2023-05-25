@@ -1,12 +1,26 @@
 
 const studentModel = require("../models/student")
 const userModel=require("../models/user")
+
+
 const {v4: uuidv4} = require('uuid');
 const mongoose = require('mongoose');
-const createUser = async (uName,id)=> {
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req,file,cb){
+        cb(null,'./uploads'); // thư mục để lưu file upload
 
+    },
+    filename: function (req,file, cb){
+        cb(null,file.originalname); // đặt tên file upload là tên góc của file
+    }
+});
+ const upload=multer({storage:storage});
+
+const createUser = async (uName,id, avatar)=> {
+    
     const password= uuidv4().substr(0,8).toString();
-    const newUser= new userModel({idUser:id,userName:uName, password:password,position:"student"});
+    const newUser= new userModel({idUser:id,userName:uName, password:password,position:"student",avatar:avatar});
  
     return await newUser.save();
 }
@@ -18,24 +32,35 @@ const studentController = {
    
   addStudent  : async(req,res)=>{
     try{
-        console.log("00")
-       let user;
-       if(req.body.idUser)
-       {
-    
-        user  =await userModel.findOne({idUser: req.body.idUser});
-        if(!user){
+      let user;
+      upload.single('avatar')(req,res, async function(err){
+        console.log("1")
+        if(err){
+          console.error(err);
+          res.status(500).json({ message: "Server2 error" });
+        }else{
+            if(req.body.idUser)
+          {
+         user  =await userModel.findOne({idUser: req.body.idUser});
+         if(!user){
             return res.status(404).json({error:"User not found"});
         }
        }else{
        
          const idUser="USER"+uuidv4().substr(0,6).toString();
-         user= await createUser(req.body.name,idUser);
+         user= await createUser(req.body.name,idUser,req.file ? req.file.filename : null);
          console.log("05")
-       }
-       console.log("00")
-       const student= await createStudent(req.body.name,user.idUser,req.body.department_id,req.body.acclass_id);
-
+          }
+          console.log("00")
+          console.log(user.idUser)
+          const student= await createStudent(req.body.name,user.idUser,req.body.department_id,req.body.acclass_id);
+          res.status(201).json(student);
+        }
+      })
+        
+       
+       
+       
         // let user;
         // console.log("1");
         // if(req.body.idUser){
@@ -56,7 +81,7 @@ const studentController = {
         // console.log(req.body.name+user.idUser);
         // const student = await newStudent.save();
        
-        res.status(201).json(student);
+        
     }catch(err){
        
         res.status(500).json({ error: 'Server error' });
@@ -64,7 +89,7 @@ const studentController = {
   },
   getAllStudent : async(req,res)=>{
     try{
-      const student = await studentModel.find();
+      const student = await studentModel.find().populate("idUser","avatar");
       res.status(201).json(student);
     }catch{
       res.status(500).json({error:"Server not found"});

@@ -12,6 +12,9 @@ const userSchema = mongoose.Schema({
     },
     position:{
         type: String, required: true, maxLength: 50
+    },
+    avatar:{
+        type: String
     }
 },{timestamps:true})
 

@@ -8,8 +8,6 @@ const abcController = {
         try{
             console.log(req.params.modelName);
             const myModel = require("../models/"+req.params.modelName);
-          
-           
             const a= await myModel.find();
             res.status(201).json(a);
         }catch(err){
