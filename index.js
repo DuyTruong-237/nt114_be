@@ -13,6 +13,7 @@ const subjectRoutes = require("./routes/subject");
 const subclassRoutes = require("./routes/subjectclass");
 const sublecRoutes = require("./routes/subjecturerers");
 const ABC = require("./routes/abc");
+const uploadFile = require("./routes/upload")
 
 doten.config();
 const app = express();
@@ -61,6 +62,7 @@ app.use("/v1/student",studentRoutes);
 app.use("/v1/subject",subjectRoutes);
 app.use("/v1/subclass",subclassRoutes);
 app.use("/v1/sublec",sublecRoutes);
+app.use("/v1/uploadfile", uploadFile);
 app.listen(3001,()=>{
     console.log('Server is running')
 })

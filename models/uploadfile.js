@@ -1,6 +1,6 @@
 const mongoose =require('mongoose')
 
-const departSchema = mongoose.Schema({
+const uploadSchema = mongoose.Schema({
     title:{
         type : String, require : true, Maxlength : 50
     },
@@ -10,7 +10,7 @@ const departSchema = mongoose.Schema({
     subclass:{
         type: mongoose.Schema.Types.ObjectId,ref: 'SubjectClass',  maxLength: 50
     },
-     URl:{
+     URL:{
         type : String, require : true
     },
     type:{
@@ -20,5 +20,5 @@ const departSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,ref: 'Lecturer',  maxLength: 50
     },
 },{timestamps:true})
-const depart = mongoose.model('Department',departSchema);
-module.exports= depart;
+const upload = mongoose.model('Upload',uploadSchema);
+module.exports= upload;
