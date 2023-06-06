@@ -45,7 +45,7 @@ const lecturerController = {
     },
     getAllLecturer : async(req,res)=>{
         try{
-            const allLecturer= await lecturerModel.find();
+            const allLecturer= await lecturerModel.find().populate("department_id","name");
              res.status(201).json(allLecturer);
         }catch(err){
              res.status(500).json({error:"Server not found"})

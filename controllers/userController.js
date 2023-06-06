@@ -2,6 +2,9 @@ const userModel = require("../models/user");
 const {v4: uuidv4} = require('uuid');
 const multer = require('multer');
 const user = require("../models/user");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { json } = require("express");
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null,'./uploads'); // thư mục để lưu file upload
@@ -24,10 +27,12 @@ const userController = {
                 console.error(err);
                 res.status(500).json({ message: "Server error" });
             }else{
+                const hashedPassword = await bcrypt.hash(req.body.password, 10);
+                console.log(hashedPassword)
                 const newUser = new userModel ({
                     idUser:"USER"+ uuidv4().substr(0,6).toString(),
                     userName:req.body.userName,
-                    password:req.body.password,
+                    password:hashedPassword,
                     position:req.body.position,
                     avatar: req.file ? req.file.filename : null});
                     console.log(req.file.filename)
@@ -84,6 +89,29 @@ const userController = {
             res.status(500).json({message:"Server error"});
         });
 
+    },
+    login : async (req,res)=>{
+        try{
+            //const {userName, password} = req.body;
+            const userName=req.body.userName;
+            const password= req.body.password;
+            console.log(userName)
+            console.log(password);
+            const user= await userModel.findOne({userName});
+            if(!user){
+                return res.status(401).json({message:"user not found"});
+            }
+            console.log(user.password)
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if(!isPasswordValid){
+                return res.status(401).json({message:"Invalid username or password"});
+
+            }
+            const token = jwt.sign({userId: user._id},'mykey',{expiresIn: '1h'});
+            res.json({token})
+        } catch(err){
+            res.status(500).json({ message: 'Server error' });
+        }
     }
     
   
