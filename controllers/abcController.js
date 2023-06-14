@@ -1,12 +1,10 @@
 const { response } = require("express");
 const  mongoose  = require("mongoose");
 
-
-
 const abcController = {
     getAll : async (req,res)=>{
         try{
-            console.log(req.params.modelName);
+            
             const myModel = require("../models/"+req.params.modelName);
             const a= await myModel.find();
             res.status(201).json(a);

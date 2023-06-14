@@ -97,7 +97,7 @@ const studentController = {
   },
   getStudent : async(req,res)=>{
     try{
-      const student = await studentModel.findById(req.params.id);
+      const student = await studentModel.findById(req.params.id).populate("department_id","name").populate("acclass_id","name");;
       res.status(201).json(student);
     }catch{
       res.status(500).json({error:"Server not found"});
