@@ -25,7 +25,7 @@ const userController = {
             if(err)
             {
                 console.error(err);
-                res.status(500).json({ message: "Server error" });
+                res.status(500).json({ message: "Server error1" });
             }else{
                 const hashedPassword = await bcrypt.hash(req.body.password, 10);
                 console.log(hashedPassword)
@@ -35,7 +35,7 @@ const userController = {
                     password:hashedPassword,
                     position:req.body.position,
                     avatar: req.file ? req.file.filename : null});
-                    console.log(req.file.filename)
+                   
                     await newUser.save();
                     res.status(201).json({
                         message:"User created successfully",
@@ -105,10 +105,9 @@ const userController = {
             const isPasswordValid = await bcrypt.compare(password, user.password);
             if(!isPasswordValid){
                 return res.status(401).json({message:"Invalid username or password"});
-
             }
             const token = jwt.sign({userId: user._id},'mykey',{expiresIn: '1h'});
-            res.json({token})
+            res.json({token,user})
         } catch(err){
             res.status(500).json({ message: 'Server error' });
         }

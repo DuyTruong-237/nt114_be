@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
 const authMiddleware = {
-    protectedRoute : async (req,res)=>{
+    protectedRoute : async (req,res,next)=>{
         try{
             const token = req.headers.authorization || req.cookies.token;
             if(!token){
@@ -18,7 +18,7 @@ const authMiddleware = {
             if(!user){
                 return res.status(401).json({ message: 'Access denied user' });
             }
-            res.json({ message: 'Protected route', user });
+           next()
         }catch (err){
             res.status(500).json({message: 'Server error'})
         }

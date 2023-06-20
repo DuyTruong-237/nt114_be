@@ -64,7 +64,7 @@ app.use("/v1/subject",subjectRoutes);
 app.use("/v1/subclass",subclassRoutes);
 app.use("/v1/sublec",sublecRoutes);
 app.use("/v1/uploadfile", uploadFile);
-app.use("/v1/major", uploadFile);
+app.use("/v1/major", majorRouter);
 app.listen(3001,()=>{
     console.log('Server is running')
 })

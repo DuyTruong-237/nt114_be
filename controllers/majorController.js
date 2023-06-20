@@ -46,7 +46,7 @@ const MajorController = {
         }
     },
     getAllMajor : async (req,res) =>{
-        try{
+        try{a
             const Major= await MajorModel.find();
             res.status(201).json(Major);
         }catch{
