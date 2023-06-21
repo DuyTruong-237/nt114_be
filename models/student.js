@@ -4,47 +4,68 @@ const studentSchema = mongoose.Schema({
     id:{
         type: String,
         require: true,
-        
+        maxLength:50,
+        unique: true
     },
     idUser:{
-        type: String, required: true, maxLength: 50
-       },
+        type: String,ref: 'User', required: true, maxLength: 50,unique:true
+    },
     department_id:{
-        type: String, required: true, maxLength: 50
-       },
-    acclassId:{
-
+        type:  mongoose.Schema.Types.ObjectId,ref: 'Department', required: true, maxLength: 50
     },
-    studentName:{
-
+    acclass_id: {
+        type:  mongoose.Schema.Types.ObjectId,ref: 'Acclass', require: true, maxLength: 50
     },
-    studentCl:{
-
+    name: {
+        type: String,
+        require:true,
+        maxLength: 50
     },
-    dobDate:{
+    // CI: {
+    //     type: String,
+    //     require:true,
+    //     maxLength: 50
+    // },
+    // dob: {
+    //     type: Date,
+    //     require:true,
+      
+    // },
+    // sex: {
+    //     type: Number,
+    //     require: true
+    // },
+    // address: {
+    //     type: String,
+    //     require:true,
+        
+    // },
+    // email: {
+    //     type: String,
+    //     require:true,
+    //     maxLength: 50
+    // },
+    // phone_num: {
+    //     type: String,
+    //     require:true,
+    //     maxLength: 15
+    // },
+    // majors: {
+    //     type: String,
+    //     require:true,
+    //     maxLength: 50
+    // },
+    // train_sys:{
+    //     type: String,
+    //     require:true,
+    //     maxLength: 50
+    // },
+    // status: {
+    //     type: String,
+    //     require:true,
+    //     maxLength: 50
+    // },
 
-    },
-    studentSex:{
-
-    },
-    address:{
-
-    },
-    email:{
-
-    },
-    phoneNum:{
-
-    },
-    majors:{
-
-    },
-    trainSys:{
-
-    },
-    status:{
-
-    },
-
-    
-})
+},{timestamps:true})
+const student = mongoose.model('Student',studentSchema);
+module.exports= student;

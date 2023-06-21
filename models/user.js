@@ -8,20 +8,23 @@ const userSchema = mongoose.Schema({
         type: String, required: true, maxLength: 50
     },
     password:{
-        type: String, required: true, maxLength: 50
+        type: String, required: true, maxLength: 100
     },
     position:{
         type: String, required: true, maxLength: 50
+    },
+    avatar:{
+        type: String
     }
 },{timestamps:true})
-userSchema.set('toJSON',{
-    virtuals:true,
-    transform: function(doc, ret){
-        ret.id= ret._id;
-        delete ret._id;
-        delete ret._V
-    }
-})
+
+// userSchema.pre('save',function(next){
+//     const user =  this;
+//     if(!user.idUser){
+//         user.idUser='USER'+ Date.now().toString();
+//     }
+//     next();
+// });
 
 const user = mongoose.model('User',userSchema);
 module.exports= user;

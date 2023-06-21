@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
 
 const acclassSchema = mongoose.Schema({
-    acclass_id:{
 
-    },
     department_id:{
+        type: mongoose.Schema.Types.ObjectId,ref: 'Department', required: true, maxLength: 50
 
     },
-    lectures_id:{
+    lecturer_id:{
+        type: mongoose.Schema.Types.ObjectId,ref: 'Lecturer', required: true, maxLength: 50
 
     },
     name:{
+        type: String,
+        require:true,
+        maxLength: 50
 
     }
-})
+},{timestamps:true})
+const acclass = mongoose.model('Acclass',acclassSchema);
+module.exports= acclass;
