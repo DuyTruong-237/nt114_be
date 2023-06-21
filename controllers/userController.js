@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     }
 });
  const upload=multer({storage:storage});
-
+let tokens=[]
 const userController = {
     //upload : multer({storage:storage}),
     addUser : async (req, res)=>{
@@ -107,9 +107,26 @@ const userController = {
                 return res.status(401).json({message:"Invalid username or password"});
             }
             const token = jwt.sign({userId: user._id},'mykey',{expiresIn: '1h'});
+            tokens.push(token)
+           
             res.json({token,user})
+           
+           
         } catch(err){
             res.status(500).json({ message: 'Server error' });
+        }
+    },
+    logout : async (req,res)=>{
+        try{
+           
+            console.log( req.headers.authorization)
+            tokens = tokens.filter(
+                (token) => token !==  req.headers.authorization
+            );
+           
+            res.status(200).json("Logged out !");
+        }catch(err){
+            res.status(200).json("server err !");
         }
     }
     
