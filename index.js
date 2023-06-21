@@ -2,6 +2,7 @@ const express =require('express');
 const doten = require('dotenv');
 const mongoose =require('mongoose');
 const cors =require('cors');
+const cookieParser = require('cookie-parser');
 const userRoutes = require("./routes/user");
 const acclassRoutes = require("./routes/acclass");
 const coreRoutes = require("./routes/core");
@@ -18,7 +19,7 @@ const uploadFile = require("./routes/upload")
 
 doten.config();
 const app = express();
-
+app.use(cookieParser({ credentials: true }));
 
 mongoose.connect('mongodb+srv://20522080:123456tr@cluster0.co1hxc7.mongodb.net/nt114_school_app?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -36,6 +37,7 @@ db.once('open', () => {
 });
 app.use(cors());
 app.use(express.json());
+
 app.use('/uploads',express.static('uploads'))
 // const options = {
 //     definition: {
