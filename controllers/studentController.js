@@ -25,7 +25,7 @@ const createUser = async (uName,id, avatar)=> {
     return await newUser.save();
 }
 const createStudent = async (uName, idUser, depart_id,acclass_id)=> {
-    const newStudent=new studentModel({id:"STD"+uuidv4().substr(0,6).toString(),idUser:idUser,name:uName, department_id:depart_id,acclass_id:acclass_id})
+    const newStudent=new studentModel({id:idUser,idUser:idUser,name:uName, department_id:depart_id,acclass_id:acclass_id})
     return await newStudent.save();
 }
 const studentController = {
@@ -107,13 +107,13 @@ const studentController = {
   getStudentID : async(req,res)=>{
     try{
       let student;
-      if(req.body.idUser)
+      if(req.params.idUser)
       {
-        student= await studentModel.findOne({idUser: req.body.idUser});
+        student= await studentModel.findOne({idUser: req.params.idUser});
       }
-      else if(req.body.id)
+      else if(req.params.id)
       {
-        student = await studentModel.findOne({id: req.body.id});
+        student = await studentModel.findOne({id: req.params.id});
       }
       res.status(201).json(student);
     }

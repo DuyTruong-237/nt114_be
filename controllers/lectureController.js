@@ -12,7 +12,7 @@ const createUser = async(uName,id)=>
 }
 const createLecturer = async(uName,idUser,depart_id)=>
 {
-    const newLecturer= new lecturerModel({id:"LEC"+uuidv4().substr(0,6).toString(),idUser:idUser, name:uName, department_id:depart_id});
+    const newLecturer= new lecturerModel({id:idUser,idUser:idUser, name:uName, department_id:depart_id});
     return await newLecturer.save();
 }
 const lecturerController = {

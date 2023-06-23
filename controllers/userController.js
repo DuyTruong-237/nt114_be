@@ -5,21 +5,24 @@ const user = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { json } = require("express");
+let  idsetup;
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null,'./uploads'); // thư mục để lưu file upload
 
     },
     filename: function (req,file, cb){
-        cb(null,file.originalname); // đặt tên file upload là tên góc của file
+        cb(null,idsetup); // đặt tên file upload là tên góc của file
     }
 });
  const upload=multer({storage:storage});
 let tokens=[]
+
 const userController = {
     //upload : multer({storage:storage}),
     addUser : async (req, res)=>{
         try{
+           idsetup="USER"+ uuidv4().substr(0,6).toString();
            upload.single('avatar')(req,res, async function (err)
            {
             if(err)
@@ -30,7 +33,7 @@ const userController = {
                 const hashedPassword = await bcrypt.hash(req.body.password, 10);
                 console.log(hashedPassword)
                 const newUser = new userModel ({
-                    idUser:"USER"+ uuidv4().substr(0,6).toString(),
+                    idUser:idsetup,
                     userName:req.body.userName,
                     password:hashedPassword,
                     position:req.body.position,
@@ -51,7 +54,8 @@ const userController = {
         }
     },
     updateUser : (req,res)=>{
-        const id= req.params.idUser;
+        const id= req.params.idUser
+        
         const user= userModel.findOne({idUser:id});
         const uploadFile=new Promise((resolve, reject)=>{
             upload.single('avatar')(req, res, (err)=>{
@@ -101,7 +105,9 @@ const userController = {
             if(!user){
                 return res.status(401).json({message:"user not found"});
             }
-            console.log(user.password)
+             //const imagePath = path.join(__dirname, 'uploads', user.avatar );
+            //  user.avatar=imagePath;
+            // console.log(user.imagePath)
             const isPasswordValid = await bcrypt.compare(password, user.password);
             if(!isPasswordValid){
                 return res.status(401).json({message:"Invalid username or password"});

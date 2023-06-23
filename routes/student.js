@@ -6,7 +6,7 @@ router.put('/updateStudent/:id', studentController.updateStudent);
 router.delete('/deleteStudent/:id', studentController.deleteStudent);
 router.get('/getAllStudent', studentController.getAllStudent);
 router.get('/getStudent/:id',studentController.getStudent);
-router.get('/getStudentID', studentController.getStudentID);
+router.get('/getStudentID/:idUser', studentController.getStudentID);
 
 
 
