@@ -10,7 +10,7 @@ const coreSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,ref: 'Subject', required: true, maxLength: 50
     },
     subject_class:{
-        type: mongoose.Schema.Types.ObjectId,ref: 'Subject_Class', maxLength: 50
+        type: mongoose.Schema.Types.ObjectId,ref: 'SubjectClass', maxLength: 50
     },
     process:{
         type: Number,default: 0.00,  min: 0.00, max: 10.00

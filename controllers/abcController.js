@@ -59,7 +59,7 @@ const abcController = {
             const myModel = require("../models/"+req.params.modelName);
             const id= req.params.id;
             console.log(id)
-            const obj= await myModel.find({student_id:id}).populate("student_id","name id department_id");
+            const obj= await myModel.find({student_id:id}).populate("student_id","name id department_id").populate("subject_class","subname term yearSchool").populate("subject_id","name cre subject_id");;
             console.log(obj);
             res.status(201).json(obj);
             
