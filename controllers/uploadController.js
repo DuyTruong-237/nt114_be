@@ -1,18 +1,21 @@
 const uploadModel= require("../models/uploadfile");
 const multer = require("multer")
+let nameFile;
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null,'./fileupload'); // thư mục để lưu file upload
 
     },
     filename: function (req,file, cb){
-        cb(null,file.originalname); // đặt tên file upload là tên góc của file
+        cb(null,nameFile+file.originalname); // đặt tên file upload là tên góc của file
     }
 });
 const upload=multer({storage:storage});
 const uploadController = {
     addfile : async(req,res)=>{
         try{
+            nameFile= req.body.subclass
+            console.log(nameFile)
              upload.single('URL')(req,res, async function (err)
            {
             if(err)
@@ -50,7 +53,19 @@ const uploadController = {
         catch(err){
             res.status(500).json({message:"Server error"});
         }
+    },
+    download : async(req,res)=>{
+        try{
+            const filePath = './fileupload/'+req.params.nameFile; // Đường dẫn đến file trên máy chủ
+      
+            res.download(filePath);
+           
+        }
+        catch(err){
+            res.status(500).json({message:"Server error"});
+        }
     }
+   
 
 } 
 module.exports= uploadController;
