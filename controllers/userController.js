@@ -27,11 +27,9 @@ const userController = {
            {
             if(err)
             {
-                console.error(err);
                 res.status(500).json({ message: "Server error1" });
             }else{
                 const hashedPassword = await bcrypt.hash(req.body.password, 10);
-                console.log(hashedPassword)
                 const newUser = new userModel ({
                     idUser:idsetup,
                     userName:req.body.userName,
@@ -134,8 +132,27 @@ const userController = {
         }catch(err){
             res.status(200).json("server err !");
         }
-    }
+    },
+     uploadAvatar : async (req, res) => {
+        try{
+            console.log(req.body.avatar)
+            idsetup=req.params.idUser
+            upload.single('avatar')(req,res, async function (err)
+           {
+            if(err)
+            {
+                res.status(500).json({ message: "Server error1" });
+            }else{
+                res.status(500).json({ message: "success" });
+            }
+           })
+        }
     
+        
+        catch(err){
+            res.status(200).json("server err !");
+        }
+    }
   
 };
 

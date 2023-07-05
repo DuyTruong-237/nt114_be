@@ -7,15 +7,14 @@ const storage = multer.diskStorage({
 
     },
     filename: function (req,file, cb){
-        cb(null,nameFile+file.originalname); // đặt tên file upload là tên góc của file
+        cb(null,file.originalname); // đặt tên file upload là tên góc của file
     }
 });
 const upload=multer({storage:storage});
 const uploadController = {
     addfile : async(req,res)=>{
         try{
-            nameFile= req.body.subclass
-            console.log(nameFile)
+           
              upload.single('URL')(req,res, async function (err)
            {
             if(err)
