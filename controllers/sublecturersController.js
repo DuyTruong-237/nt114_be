@@ -40,6 +40,24 @@ const sublecturerController = {
         }catch(err){
             res.status(500).json("Server not found");
         }
+    },
+    getSubLectID : async (req,res)=>{
+        try{
+            const id=req.params.id;
+            const idrole=req.params.idRole;
+            let SubLec
+            if(idrole=="lecturer_id")
+            {
+                 SubLec= await sublecturerModel.find({lecturer_id:id}).populate("subject_id","name cre subject_id");
+            }else{
+                 SubLec= await sublecturerModel.find({subject_id:id}).populate("lecturer_id","name id department_id");
+            }
+            
+            res.status(201).json(SubLec);
+
+        }catch(err){
+            res.status(500).json("Server not found");
+        }
     }
     ,
     updateSubLec : async (req,res)=>{

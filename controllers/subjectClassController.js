@@ -90,7 +90,7 @@ const subjectClassController = {
     },
     getSubClassLec : async(req,res)=>{
         try{
-            const subclass= await subjectClassModel.find({lecturer_id : req.params.id});
+            const subclass= await subjectClassModel.find({lecturer_id : req.params.id}).populate("lecturer_id","name id department_id");
             res.status(201).json(subclass);
         }catch(err){
 

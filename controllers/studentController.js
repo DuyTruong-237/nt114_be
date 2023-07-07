@@ -27,8 +27,30 @@ const createUser = async (uName,id, avatar)=> {
     const newUser= new userModel({idUser:id,userName:uName, password:password,position:"student",avatar:avatar});
     return await newUser.save();
 }
-const createStudent = async (uName, idUser, depart_id,acclass_id)=> {
-    const newStudent=new studentModel({id:idUser,idUser:idUser,name:uName, department_id:depart_id,acclass_id:acclass_id})
+const createStudent = async (uName, idUser, depart_id,acclass_id,CI,
+  dob,
+  sex,
+  address,
+  email,
+  phone_num,
+  majors,
+  train_sys,
+  status)=> {
+    const newStudent=new studentModel({id:idUser,
+      idUser:idUser,
+      name:uName,
+      department_id:depart_id,
+       acclass_id:acclass_id,
+       CI:CI,
+       dob:dob,
+       sex:sex,
+       address:address,
+       email:email,
+       phone_num:phone_num,
+       majors:majors,
+       train_sys:train_sys,
+       status:status
+      })
     return await newStudent.save();
 }
 const studentController = {
@@ -55,7 +77,19 @@ const studentController = {
           }
           console.log("00")
           console.log(user.idUser)
-          const student= await createStudent(req.body.name,user.idUser,req.body.department_id,req.body.acclass_id);
+          const student= await createStudent(req.body.name,
+            user.idUser,
+            req.body.department_id,
+            req.body.acclass_id,
+            req.body.CI,
+            req.body.dob,
+            req.body.sex,
+            req.body.address,
+            req.body.email,
+            req.body.phone_num,
+            req.body.majors,
+            req.body.train_sys,
+            req.body.status);
           res.status(201).json(student);
         }
       })
@@ -111,11 +145,11 @@ const studentController = {
       let student;
       if(req.params.idUser)
       {
-        student= await studentModel.findOne({idUser: req.params.idUser});
+        student= await studentModel.findOne({idUser: req.params.idUser}).populate("department_id","name").populate("acclass_id","name");
       }
       else if(req.params.id)
       {
-        student = await studentModel.findOne({id: req.params.id});
+        student = await studentModel.findOne({id: req.params.id}).populate("department_id","name").populate("acclass_id","name");
       }
       res.status(201).json(student);
     }

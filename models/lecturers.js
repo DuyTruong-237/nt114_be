@@ -16,48 +16,47 @@ const lecturersSchema = mongoose.Schema({
     },
     name:{
         type: String,
-        require:true,
+       
         maxLength: 50
     },
-    // Cl:{
-    //     type: String,
-    //     require:true,
-    //     maxLength: 50
-    // },
-    // dob:{
-    //     type: Date, require: true
-    // },
-    // start_date:{
-    //     type: Date, require: true
-    // },
-    // sex:{
-    //     type: Number, require: true
-    // },
-    // address:{
-    //     type: String,
-    //     require:true
+    CI:{
+        type: String,
+       
+        maxLength: 50
+    },
+    dob:{
+        type: Date
+    },
+    start_date:{
+        type: Date
+    },
+    sex:{
+        type: Number
+    },
+    address:{
+        type: String
 
-    // },
-    // email:{
-    //     type: String,
-    //     require:true,
-    //     maxLength: 50
-    // },
-    // specialize:{
-    //     type: String,
-    //     require:true,
-    //     maxLength: 100
-    // },
-    // phoneNum:{
-    //     type: String,
-    //     require:true,
-    //     maxLength: 15
-    // },
-    // position:{
-    //     type: String,
-    //     require:true,
-    //     maxLength: 30
-    // },
+    },
+    email:{
+        type: String,
+       
+        maxLength: 50
+    },
+    specialize:{
+        type: String,
+       
+        maxLength: 100
+    },
+    phoneNum:{
+        type: String,
+       
+        maxLength: 15
+    },
+    position:{
+        type: String,
+       
+        maxLength: 30
+    },
 },{timestamps:true})
 const lecturer = mongoose.model('Lecturer',lecturersSchema);
 module.exports= lecturer;

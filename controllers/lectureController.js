@@ -2,17 +2,44 @@ const { json } = require("express");
 const lecturerModel = require("../models/lecturers");
 const userModel = require("../models/user");
 const {v4:uuidv4}=require("uuid");
+const bcrypt = require("bcrypt");
+
 const student = require("../models/student");
 const createUser = async(uName,id)=>
 {
-    const password= uuidv4().substr(0,8).toString();
-    console.log(id);
+    let password= id+"123";
+    console.log(password)
+    password= await bcrypt.hash(password, 10);
     const newUser= new userModel({idUser:id,userName: uName, password:password,position:'lecturer'});
     return await newUser.save();
 }
-const createLecturer = async(uName,idUser,depart_id)=>
+const createLecturer = async(uName,
+    idUser,
+    depart_id,
+    CI,
+    dob,
+    start_date,
+    sex,
+    address,
+    email,
+    specialize,
+    phoneNum,
+    position,)=>
 {
-    const newLecturer= new lecturerModel({id:idUser,idUser:idUser, name:uName, department_id:depart_id});
+    const newLecturer= new lecturerModel({id:idUser,
+        idUser:idUser,
+        name:uName,
+        department_id:depart_id,
+        CI:CI,
+        dob:dob,
+        start_date:start_date,
+        sex:sex,
+        address:address,
+        email:email,
+        specialize:specialize,
+        phoneNum:phoneNum,
+        position:position,
+    });
     return await newLecturer.save();
 }
 const lecturerController = {
@@ -37,7 +64,19 @@ const lecturerController = {
                 user= await createUser(req.body.name,idUser);
 
             }
-            const newLecturer=await createLecturer(req.body.name,user.idUser,req.body.department_id);
+            const newLecturer=await createLecturer(
+                req.body.name,
+                user.idUser,
+                req.body.department_id,
+                req.body.CI,
+                req.body.dob,
+                req.body.start_date,
+                req.body.sex,
+                req.body.address,
+                req.body.email,
+                req.body.specialize,
+                req.body.phoneNum,
+                req.body.position);
             res.status(201).json(newLecturer);
         }catch(err){
             res.status(500).json({error:"Server not found"});

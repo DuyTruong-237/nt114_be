@@ -97,7 +97,7 @@ const userController = {
             const password= req.body.password;
             console.log(userName)
             console.log(password);
-            const user= await userModel.findOne({userName});
+            const user= await userModel.findOne({idUser:userName});
             if(!user){
                 return res.status(401).json({message:"user not found"});
             }

@@ -14,7 +14,7 @@ const upload=multer({storage:storage});
 const uploadController = {
     addfile : async(req,res)=>{
         try{
-           
+           console.log(req.body)
              upload.single('URL')(req,res, async function (err)
            {
             if(err)
