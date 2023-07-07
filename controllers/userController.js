@@ -135,22 +135,19 @@ const userController = {
     },
      uploadAvatar : async (req, res) => {
         try{
-            console.log(req.body.avatar)
+          
             idsetup=req.params.idUser
             upload.single('avatar')(req,res, async function (err)
            {
-            if(err)
-            {
-                res.status(500).json({ message: "Server error1" });
-            }else{
-                res.status(500).json({ message: "success" });
-            }
+            
+                res.status(200).json({ message: "success" });
+            
            })
         }
     
         
         catch(err){
-            res.status(200).json("server err !");
+            res.status(500).json("server err !");
         }
     }
   

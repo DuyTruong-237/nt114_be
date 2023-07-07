@@ -66,9 +66,9 @@ const lecturerController = {
     getLecturerID : async(req,res)=>{
         try{
             let lecturer;
-           if(req.body.idUser)
+           if(req.params.id)
            {
-            lecturer= await lecturerModel.findOne({idUser: req.body.idUser});
+            lecturer= await lecturerModel.findOne({idUser: req.params.id});
            }
           else if(req.body.id)
            {

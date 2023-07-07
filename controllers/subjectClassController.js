@@ -36,8 +36,6 @@ const subjectClassController = {
         }catch(err){
         res.status(500).json("Server not found")
         }
-
-        
     },
     deleteSubClass : async(req,res)=>{
         try{
@@ -85,6 +83,14 @@ const subjectClassController = {
     getSubClass : async(req,res)=>{
         try{
             const subclass= await subjectClassModel.findById(req.params.id);
+            res.status(201).json(subclass);
+        }catch(err){
+
+        }
+    },
+    getSubClassLec : async(req,res)=>{
+        try{
+            const subclass= await subjectClassModel.find({lecturer_id : req.params.id});
             res.status(201).json(subclass);
         }catch(err){
 
