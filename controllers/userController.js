@@ -9,7 +9,6 @@ let  idsetup;
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null,'./uploads'); // thư mục để lưu file upload
-
     },
     filename: function (req,file, cb){
         cb(null,idsetup); // đặt tên file upload là tên góc của file
@@ -36,7 +35,6 @@ const userController = {
                     password:hashedPassword,
                     position:req.body.position,
                     avatar: req.file ? req.file.filename : null});
-                   
                     await newUser.save();
                     res.status(201).json({
                         message:"User created successfully",

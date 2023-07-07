@@ -40,7 +40,7 @@ const departmentController = {
     },
     getAllDepartment : async(req,res)=>{
         try{
-            const AllDepartment= await departmentModel.find();
+            const AllDepartment= await departmentModel.find().populate("dean name","vdean name");
             res.status(201).json(AllDepartment);
         }catch(err)
         {

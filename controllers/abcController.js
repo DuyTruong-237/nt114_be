@@ -4,9 +4,8 @@ const  mongoose  = require("mongoose");
 const abcController = {
     getAll : async (req,res)=>{
         try{
-            
             const myModel = require("../models/"+req.params.modelName);
-            const a= await myModel.find();
+            const a= await myModel.find().populate();;
             res.status(201).json(a);
         }catch(err){
             res.status(500).json("Server not found");

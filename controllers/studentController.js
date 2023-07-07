@@ -2,10 +2,12 @@
 const studentModel = require("../models/student")
 const userModel=require("../models/user")
 
+const bcrypt = require("bcrypt");
 
 const {v4: uuidv4} = require('uuid');
 const mongoose = require('mongoose');
 const multer = require('multer');
+
 const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null,'./uploads'); // thư mục để lưu file upload
@@ -19,9 +21,10 @@ const storage = multer.diskStorage({
 
 const createUser = async (uName,id, avatar)=> {
     
-    const password= uuidv4().substr(0,8).toString();
+    let password= id+"123";
+    console.log(password)
+    password= await bcrypt.hash(password, 10);
     const newUser= new userModel({idUser:id,userName:uName, password:password,position:"student",avatar:avatar});
- 
     return await newUser.save();
 }
 const createStudent = async (uName, idUser, depart_id,acclass_id)=> {
@@ -46,7 +49,6 @@ const studentController = {
             return res.status(404).json({error:"User not found"});
         }
        }else{
-       
          const idUser="USER"+uuidv4().substr(0,6).toString();
          user= await createUser(req.body.name,idUser,req.file ? req.file.filename : null);
          console.log("05")
