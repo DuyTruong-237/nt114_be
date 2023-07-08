@@ -26,6 +26,21 @@ const coreController = {
         }catch (err){
             res.status(500).json("Server not found");
         }
+    },
+    update : async (req,res)=>{
+        try{
+           console.log("112")
+            const id= req.params.id;
+            const model= await coreModel.findOne({student_id:id});
+            if(!model){
+                return res.status(404).json("not found")
+            }
+            Object.assign(model,req.body);
+            await model.save();
+            res.status(201).json(model);
+        }catch(err){
+            res.status(500).json("Server not found");
+        }
     }
   
 };

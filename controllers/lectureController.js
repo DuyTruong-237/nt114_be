@@ -152,6 +152,20 @@ const lecturerController = {
         {
             res.status(500).json("Server not found");
         }
+    },
+    getLecturerIDdepart : async(req,res)=>{
+        try{
+            let lecturer;
+           if(req.params.id)
+           {
+            lecturer= await lecturerModel.findOne({department_id: req.params.id});
+           }
+          
+            res.status(201).json(lecturer);
+        }catch(err)
+        {
+            res.status(500).json({error:"Server not sound"})
+        }
     }
 
 };
