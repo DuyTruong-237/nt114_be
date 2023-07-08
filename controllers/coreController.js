@@ -41,7 +41,20 @@ const coreController = {
         }catch(err){
             res.status(500).json("Server not found");
         }
-    }
+    },
+    getIDclass : async (req,res)=>{
+        try{
+           
+            const id= req.params.id;
+            const model= await coreModel.find({subject_class:id}).populate("student_id","name id department_id");
+            if(!model){
+                return res.status(404).json("not found")
+            }
+            res.status(201).json(model);
+        }catch(err){
+            res.status(500).json("Server not found");
+        }
+    },
   
 };
 
