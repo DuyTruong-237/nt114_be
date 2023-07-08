@@ -146,7 +146,6 @@ const lecturerController = {
             await lecturer.deleteOne();
             await userModel.findOneAndDelete({idUser:lecturer.idUser});
             res.status(201).json("Delete success")
-
         }
         catch(err)
         {
@@ -158,7 +157,7 @@ const lecturerController = {
             let lecturer;
            if(req.params.id)
            {
-            lecturer= await lecturerModel.findOne({department_id: req.params.id});
+            lecturer= await lecturerModel.find({department_id: req.params.id});
            }
           
             res.status(201).json(lecturer);

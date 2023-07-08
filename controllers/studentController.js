@@ -58,6 +58,7 @@ const studentController = {
   addStudent  : async(req,res)=>{
     try{
       let user;
+      console.log(req.body)
       upload.single('avatar')(req,res, async function(err){
         console.log("1")
         if(err){
